@@ -1,5 +1,6 @@
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -8,26 +9,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.*;
 
-public class FindTheDistanceBetweenTwoGivenPoints extends GraphicsProgram {
+public class BasicTrig extends GraphicsProgram {
 
-    JFormattedTextField coor1 = new JFormattedTextField("                           ");
-    JFormattedTextField coor2 = new JFormattedTextField("                           ");
+    JFormattedTextField input = new JFormattedTextField("                           ");
 
     JLabel answer = new JLabel("<html>  </html>");
-    JLabel answer2 = new JLabel("<html>  </html>");
-
-    private static final Pattern listAsString = Pattern.compile("^\\[?([^\\[\\]]*)\\]?$");
-
-    private List<String> getList(String value) {
-        Matcher matcher = listAsString.matcher((String) value);
-        if (matcher.matches()) {
-            String[] split = matcher.group(matcher.groupCount()).split("\\s*,\\s*");
-            return new ArrayList<>(Arrays.asList(split));
-        }
-        return Collections.emptyList();
-    }
 
     public void init(){
         windowUISetup();
@@ -54,17 +41,14 @@ public class FindTheDistanceBetweenTwoGivenPoints extends GraphicsProgram {
         headerColor.setColor(new Color(160, 171, 187));
         headerColor.sendToBack();
 
-        // create the calculator label
-        JLabel calcLabel = new JLabel("<html>Find the distance between<p>two points on a graph.</html>");
+        // create the calculator JLabel
+        JLabel calcLabel = new JLabel("<html>Basic Trig Calculator</html>");
         add(calcLabel, getWidth()/2 - calcLabel.getWidth()/2,getHeight()/40);
         calcLabel.setBounds(getWidth()/2-calcLabel.getWidth()/2,getHeight()/20,calcLabel.getWidth(),calcLabel.getHeight());
 
-        // add the answer label
+        // add the answer JLabel
         add(answer,getWidth() * 0.1,getHeight()/2 + getHeight()/4);
         answer.setBounds(answer.getX(),answer.getY(),1000,answer.getHeight());
-
-        add(answer2,getWidth() * 0.1,getHeight()/2 + getHeight()/4 + answer.getHeight());
-        answer2.setBounds(answer2.getX(),answer2.getY(),1000,answer.getHeight());
     }
 
     private void createInputGRectBorders(){
@@ -82,6 +66,13 @@ public class FindTheDistanceBetweenTwoGivenPoints extends GraphicsProgram {
         border2.setFilled(true);
         border2.setFillColor(new Color(213, 231, 231));
 
+        // create input GRect border3
+        GRect border3 = new GRect((double) getWidth() * 0.8, getHeight()/10);
+        add(border3, getWidth()*0.1,(getHeight()/40) * 18);
+        border3.sendToBack();
+        border3.setFilled(true);
+        border3.setFillColor(new Color(213, 231, 231));
+
         // create answer GRect area 1
         GRect answerBox = new GRect(getWidth()+2,getHeight()/6);
         add(answerBox,-1,(getHeight()/10) * 7.2);
@@ -98,20 +89,17 @@ public class FindTheDistanceBetweenTwoGivenPoints extends GraphicsProgram {
 
     private void createInputFields(){
         // create coor1 (coordinate 1) text field
-        add(coor1, getWidth()/2 - getWidth()/10,(getHeight()/40) * 12);
-        coor1.setVisible(true);
-        coor1.setText("");
-
-        // create coor2 (coordinate 2) text field
-        add(coor2, getWidth()/2 - getWidth()/10,(getHeight()/40) * 18);
-        coor2.setVisible(true);
-        coor2.setText("");
+        add(input, getWidth()/2 - getWidth()/10,(getHeight()/40) * 12);
+        input.setVisible(true);
+        input.setText("");
 
         // create input labels
-        JLabel coor1Label = new JLabel("Point A:");
+        JLabel coor1Label = new JLabel("Leg A:");
         add(coor1Label,(getWidth() * 0.15), (getHeight()/40) * 13);
-        JLabel coor2Label = new JLabel("Point B:");
+        JLabel coor2Label = new JLabel("Leg B:");
         add(coor2Label,(getWidth() * 0.15), (getHeight()/40) * 19);
+        JLabel coor3Label = new JLabel("Leg C:");
+        add(coor3Label,(getWidth() * 0.15), (getHeight()/40) * 25);
 
     }
 
@@ -126,24 +114,7 @@ public class FindTheDistanceBetweenTwoGivenPoints extends GraphicsProgram {
     }
 
     private void calculate() {
-
-        // clear answer box
-        answer.setText("");
-
-        // convert the Strings to an array
-        String[] point1Arr = MHEngine.convertStringToArray(coor1.getText(),"(),[ ]*");
-        String[] point2Arr = MHEngine.convertStringToArray(coor2.getText(),"(),[ ]*");
-
-        // assigning points to the values given
-        Point p1 = new Point(Double.parseDouble(point1Arr[0]),Double.parseDouble(point1Arr[1]));
-        Point p2 = new Point(Double.parseDouble(point2Arr[0]),Double.parseDouble(point2Arr[1]));
-
-        // telling the MathHelperEngine to calculate
-        String[] answers = MHEngine.findDistanceOfTwoPoints(p1,p2);
-
-        // displaying the answers
-        answer.setText(answers[0]);
-        answer2.setText(answers[1]);
+       // calculate
 
     }
 
@@ -160,10 +131,11 @@ public class FindTheDistanceBetweenTwoGivenPoints extends GraphicsProgram {
     }
 
     private void clear(){
-        coor1.setText("");
-        coor2.setText("");
+        // clear inputs
+        input.setText("");
+
+        // clear answer
         answer.setText("");
-        answer2.setText("");
     }
 
 }

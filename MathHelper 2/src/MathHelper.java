@@ -1,5 +1,5 @@
 import acm.program.GraphicsProgram;
-import svu.csc213.Dialog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +12,7 @@ public class MathHelper extends GraphicsProgram {
     private int currentPage = 1;
 
     // page 1 buttons
-    JButton disBetweenTwoPoints;
+    JButton disBetweenTwoPoints, basicTrigCalc;
 
     @Override
     public void init(){
@@ -22,7 +22,7 @@ public class MathHelper extends GraphicsProgram {
         addJButtons();
 
         navIndicator = new JLabel("null");
-        updateNavigation();
+        updatePage();
         add(navIndicator, getWidth()/40,getHeight() - 30);
     }
 
@@ -32,23 +32,25 @@ public class MathHelper extends GraphicsProgram {
             // Page Navigation
             case "Page 1":
                 currentPage = 1;
-                updateNavigation();
+                updatePage();
                 break;
 
             case "Page 2":
                 currentPage = 2;
-                updateNavigation();
+                updatePage();
                 break;
 
             case "Page 3":
                 currentPage = 3;
-                updateNavigation();
+                updatePage();
                 break;
 
             // page 1
             case "<html>Find the distance and midpoint between two points</html>":
-                // start the FindDistanceBetweenTwoPoints (FTDBTP) class
                  new FindTheDistanceBetweenTwoGivenPoints().start();
+                break;
+            case "<html>Basic Trig Calculator</html>":
+                new BasicTrig().start();
                 break;
 
             default:
@@ -70,12 +72,15 @@ public class MathHelper extends GraphicsProgram {
 
         // instantiating page 1 options
         disBetweenTwoPoints = new JButton("<html>Find the distance and midpoint between two points</html>");
+        basicTrigCalc = new JButton("<html>Basic Trig Calculator</html>");
 
         // adding page 1 options
         add(disBetweenTwoPoints, getWidth()/30, getHeight()/30);
+        add(basicTrigCalc, getWidth()/30, (getHeight()/30)*2);
 
         // modifying page 1 options
         disBetweenTwoPoints.setBounds(getX(),getY(),150,150);
+        basicTrigCalc.setBounds(getX(),getY(),150,150);
 
         addActionListeners();
     }
@@ -86,7 +91,32 @@ public class MathHelper extends GraphicsProgram {
         this.setTitle("MathHelper");
     }
 
-    private void updateNavigation(){
+    private void updatePage(){
+
+        if(currentPage == 1){
+            // hide other pages
+
+            // show current page
+        }
+
+        if(currentPage == 2){
+            // hide other pages
+
+            // show current page
+        }
+
+        if(currentPage == 3){
+            // hide other pages
+
+            // show current page
+        }
+
+        if(currentPage == 4){
+            // hide other pages
+
+            // show current page
+        }
+
         navIndicator.setText("Page " + currentPage);
     }
 
