@@ -48,16 +48,8 @@ public class FindTheDistanceBetweenTwoGivenPoints extends GraphicsProgram {
         this.getMenuBar().setVisible(false);
 
         // create header coloration
-        GRect headerColor = new GRect(getWidth()+1,getHeight()/5+1);
-        add(headerColor,-1,-1);
-        headerColor.setFilled(true);
-        headerColor.setColor(new Color(160, 171, 187));
-        headerColor.sendToBack();
-
-        // create the calculator label
-        JLabel calcLabel = new JLabel("<html>Find the distance between<p>two points on a graph.</html>");
-        add(calcLabel, getWidth()/2 - calcLabel.getWidth()/2,getHeight()/40);
-        calcLabel.setBounds(getWidth()/2-calcLabel.getWidth()/2,getHeight()/20,calcLabel.getWidth(),calcLabel.getHeight());
+        GProgramHeader programHeader = new GProgramHeader(this,"<html>Find the distance and midpoint<p>between two given points</html>");
+        add(programHeader,0,0);
 
         // add the answer label
         add(answer,getWidth() * 0.1,getHeight()/2 + getHeight()/4);

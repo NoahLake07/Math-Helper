@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
 public class BasicTrig extends GraphicsProgram {
 
     JFormattedTextField input = new JFormattedTextField("                           ");
+    JFormattedTextField input2 = new JFormattedTextField("                           ");
+    JFormattedTextField input3 = new JFormattedTextField("                           ");
 
     JLabel answer = new JLabel("<html>  </html>");
 
@@ -35,16 +37,8 @@ public class BasicTrig extends GraphicsProgram {
         this.getMenuBar().setVisible(false);
 
         // create header coloration
-        GRect headerColor = new GRect(getWidth()+1,getHeight()/5+1);
-        add(headerColor,-1,-1);
-        headerColor.setFilled(true);
-        headerColor.setColor(new Color(160, 171, 187));
-        headerColor.sendToBack();
-
-        // create the calculator JLabel
-        JLabel calcLabel = new JLabel("<html>Basic Trig Calculator</html>");
-        add(calcLabel, getWidth()/2 - calcLabel.getWidth()/2,getHeight()/40);
-        calcLabel.setBounds(getWidth()/2-calcLabel.getWidth()/2,getHeight()/20,calcLabel.getWidth(),calcLabel.getHeight());
+        GProgramHeader programHeader = new GProgramHeader(this,"<html>Basic Trig Calculator</html>");
+        add(programHeader,0,0);
 
         // add the answer JLabel
         add(answer,getWidth() * 0.1,getHeight()/2 + getHeight()/4);
@@ -52,12 +46,8 @@ public class BasicTrig extends GraphicsProgram {
     }
 
     private void createInputGRectBorders(){
-        // create input GRect border1
-        GRect border = new GRect((double) getWidth() * 0.8, getHeight()/10);
-        add(border, getWidth()*0.1,(getHeight()/40)*12);
-        border.sendToBack();
-        border.setFilled(true);
-        border.setFillColor(new Color(213, 231, 213));
+        GInput input1 = new GInput(getWidth()*0.1,(getHeight()/40)*18,this,"");
+        add(input1);
 
         // create input GRect border2
         GRect border2 = new GRect((double) getWidth() * 0.8, getHeight()/10);
@@ -88,14 +78,17 @@ public class BasicTrig extends GraphicsProgram {
     }
 
     private void createInputFields(){
-        // create coor1 (coordinate 1) text field
-        add(input, getWidth()/2 - getWidth()/10,(getHeight()/40) * 12);
-        input.setVisible(true);
-        input.setText("");
 
-        // create input labels
-        JLabel coor1Label = new JLabel("Leg A:");
-        add(coor1Label,(getWidth() * 0.15), (getHeight()/40) * 13);
+        // create coor2 (coordinate 2) text field
+        add(input2, getWidth()/2 - getWidth()/10,(getHeight()/40) * 18);
+        input2.setVisible(true);
+        input2.setText("");
+
+        // create coor3 (coordinate 3) text field
+        add(input3, getWidth()/2 - getWidth()/10,(getHeight()/40) * 24);
+        input3.setVisible(true);
+        input3.setText("");
+
         JLabel coor2Label = new JLabel("Leg B:");
         add(coor2Label,(getWidth() * 0.15), (getHeight()/40) * 19);
         JLabel coor3Label = new JLabel("Leg C:");
@@ -105,10 +98,10 @@ public class BasicTrig extends GraphicsProgram {
 
     private void createJButtons(){
         JButton calculate = new JButton("Calculate");
-        add(calculate,(getWidth() * 0.085),(getHeight()/40) * 24);
+        add(calculate,(getWidth() * 0.085),(getHeight()/40) * 40);
 
         JButton clear = new JButton("Clear");
-        add(clear, getWidth() * 0.4,(getHeight()/40) * 24);
+        add(clear, getWidth() * 0.4,(getHeight()/40) * 40);
 
         addActionListeners();
     }
@@ -133,6 +126,8 @@ public class BasicTrig extends GraphicsProgram {
     private void clear(){
         // clear inputs
         input.setText("");
+        input2.setText("");
+        input3.setText("");
 
         // clear answer
         answer.setText("");
